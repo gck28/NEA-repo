@@ -1,6 +1,7 @@
 package com.example.nea;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -17,7 +18,14 @@ public class Main extends Application {
 
         StartMenu startMenu = new StartMenu(this);
 
-        stage.setScene(startMenu.scene);
+        switchScene(startMenu.scene);
+
         stage.show();
     }
+
+    public void switchScene(Scene scene) {
+        stage.setScene(scene);
+    }
+
+
 }

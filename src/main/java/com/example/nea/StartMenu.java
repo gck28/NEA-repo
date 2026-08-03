@@ -17,27 +17,28 @@ public class StartMenu {
     Main main;
 
     public StartMenu(Main main){
+        // create root scene
         this.main = main;
+
         root = new VBox();
         root.setAlignment(Pos.CENTER);
 
         scene = new Scene(root, main.width, main.height);
 
+        // create label and button
+
         Label label = new Label("Press button to start the game");
         Button button = new Button("Start");
+
+        // switch scene if button is clicked
         button.setOnAction(event -> {
             try {
-                switchToGame();
+                main.switchScene(new Game(this.main).scene);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
 
         root.getChildren().addAll(label, button);
-
-    }
-
-    private void switchToGame() throws IOException {
-        this.main.stage.setScene(new Game(this.main).scene);
     }
 }

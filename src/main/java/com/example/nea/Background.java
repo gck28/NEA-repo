@@ -72,24 +72,24 @@ public class Background {
         int num_tiles_across = main.width / tile_width;
         int num_tiles_down = main.height / tile_width;
 
-        System.out.printf("tiles wide = %d" +
-                "tiles down = %d", num_tiles_across, num_tiles_down);
 
-        for (int i = start_y; i < start_y+num_tiles_down; i++) {
-            for (int j = start_x; j < start_x+num_tiles_across; j++) {
-                drawTile(i, j, j-start_x, i-start_y);
+        for (int i = start_y; i < start_y+num_tiles_down; i++) { // i represents tiles going down
+            for (int j = start_x; j < start_x+num_tiles_across; j++) { // j represents tiles going across
+                drawTile(i, j, j-start_x, i-start_y);  // calculate the offset for positions of each tile on the scene
             }
         }
     }
 
-
     // function to draw each tile on using switch cases for each number, which will determine colour and if it is a solid wall
     private void drawTile(int i, int j, int offset_x, int offset_y) {
         switch(tilemap[i][j]){
+            // case for a wall
             case 1:
                 graphics_context.setFill(Color.web(WALL_COLOR));
                 graphics_context.fillRect(offset_x*tile_width, offset_y*tile_width, tile_width, tile_width);
                 break;
+
+            // case for a floor
             case 0:
                 graphics_context.setFill(Color.web(FLOOR_COLOR));
                 graphics_context.fillRect(offset_x*tile_width, offset_y*tile_width, tile_width, tile_width);
