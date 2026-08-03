@@ -13,8 +13,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primary_stage) {
         stage = primary_stage;
-        stage.setWidth(width);
-        stage.setHeight(height);
         stage.setTitle("Casino game");
 
         StartMenu startMenu = new StartMenu(this);

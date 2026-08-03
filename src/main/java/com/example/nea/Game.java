@@ -56,11 +56,9 @@ public class Game {
                 cam_x = checkCam(cam_x, max_cam_x);
                 cam_y = checkCam(cam_y, max_cam_y);
 
-                System.out.printf("%d %d \n", cam_x, cam_y);
-
                 player.updatePlayer(); // handle player movement and collision
 
-                //bg.renderCanvas((int) (cam_y/ bg.tile_width), (int) (cam_x/ bg.tile_width));
+                bg.renderCanvas((int) (cam_y/ bg.tile_width), (int) (cam_x/ bg.tile_width));
             }
 
             private int checkCam(int cam, int max) {
