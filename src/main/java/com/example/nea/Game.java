@@ -60,7 +60,7 @@ public class Game {
                 cam_y = checkCam(cam_y, max_cam_y);
 
                 // update the player's position
-                player.updatePlayer(); // handle player movement and collision
+                player.updatePlayer(cam_x, cam_y); // handle player movement and collision
 
                 // render the canvas based of the camera position
                 bg.renderCanvas((cam_y/ bg.tile_width), (int) (cam_x/ bg.tile_width));
