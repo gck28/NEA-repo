@@ -3,6 +3,7 @@ module com.example.nea {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.xml;
+    requires java.desktop;
 
 
     opens com.example.nea to javafx.fxml;

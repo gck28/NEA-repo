@@ -3,9 +3,13 @@ package com.example.nea;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+import javax.swing.text.html.ImageView;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 // main class which has the scene where the player can move around and choose which game they would like to play
@@ -14,6 +18,8 @@ public class Game {
 
     Pane root;
     Scene scene;
+
+    GameDefault blackjack;
 
     Player player;
 
@@ -36,11 +42,15 @@ public class Game {
 
         player = new Player(this); // create player
 
+        // create two classes for the blackjack table on the main scene that is interacted with and the actual game that gets switched to
+        blackjack = new Blackjack(main);
+        GameSprites blackjack_table = new GameSprites(this, "Assets/GameTableSprites/blackjack_table.png", blackjack.scene, 100, 100);
+
         // display the player
         player.sprite.setX(player.map_x*bg.tile_width);
         player.sprite.setY(player.map_y*bg.tile_width);
 
-        root.getChildren().addAll(bg.canvas, player.sprite);
+        root.getChildren().addAll(bg.canvas, player.sprite, blackjack_table.sprite);
 
 
         AnimationTimer timer = new AnimationTimer() {
@@ -63,7 +73,7 @@ public class Game {
                 player.updatePlayer(cam_x, cam_y); // handle player movement and collision
 
                 // render the canvas based of the camera position
-                bg.renderCanvas((cam_y/ bg.tile_width), (int) (cam_x/ bg.tile_width));
+                bg.renderCanvas((cam_y/ bg.tile_width), (cam_x/ bg.tile_width));
             }
 
             // function to check camera angles

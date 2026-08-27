@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class GameDefault {
+class GameDefault {
     Main main;
 
     VBox root;
@@ -12,6 +12,7 @@ public class GameDefault {
 
     Button startGame;
 
+    // default game function which loads into the start screen for each minigame
     public GameDefault(Main main){
         this.main = main;
 
@@ -24,10 +25,10 @@ public class GameDefault {
         root.getChildren().addAll();
 
         main.switchScene(scene);
-
     }
 
-    private void playGame() {
+    // the code for the minigame which is @
+    void playGame() {
         root.getChildren().clear();
     }
 }
