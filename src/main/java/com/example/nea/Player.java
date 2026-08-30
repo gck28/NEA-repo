@@ -110,8 +110,6 @@ public class Player {
         sprite.setX(map_x-cam_x);
         sprite.setY(map_y-cam_y);
 
-        game.
-
         // switch player from gif to png and back
         if (w_pressed || a_pressed || s_pressed || d_pressed){
             sprite.setImage(moving_sprite);

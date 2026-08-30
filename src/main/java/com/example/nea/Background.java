@@ -72,7 +72,6 @@ public class Background {
         int num_tiles_across = main.width / tile_width;
         int num_tiles_down = main.height / tile_width;
 
-
         for (int i = start_y; i < start_y+num_tiles_down; i++) { // i represents tiles going down
             for (int j = start_x; j < start_x+num_tiles_across; j++) { // j represents tiles going across
                 drawTile(i, j, j-start_x, i-start_y);  // calculate the offset for positions of each tile on the scene

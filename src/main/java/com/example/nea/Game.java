@@ -30,6 +30,8 @@ public class Game {
     int cam_x;
     int cam_y;
 
+    ArrayList<GameSprites> game_tables;
+
     public Game (Main main) throws IOException {
         this.main = main;
 
@@ -42,9 +44,14 @@ public class Game {
 
         player = new Player(this); // create player
 
+        // create an arraylist for all the game tables
+        game_tables = new ArrayList<>();
+
         // create two classes for the blackjack table on the main scene that is interacted with and the actual game that gets switched to
         blackjack = new Blackjack(main);
         GameSprites blackjack_table = new GameSprites(this, "Assets/GameTableSprites/blackjack_table.png", blackjack.scene, 100, 100);
+
+        game_tables.add(blackjack_table);
 
         // display the player
         player.sprite.setX(player.map_x*bg.tile_width);
@@ -71,6 +78,12 @@ public class Game {
 
                 // update the player's position
                 player.updatePlayer(cam_x, cam_y); // handle player movement and collision
+
+                // reposition all the game tables with respect to the map
+                for (int i = 0; i < game_tables.size(); i++) {
+                    game_tables.get(i).sprite.setX(game_tables.get(i).map_x - cam_x);
+                    game_tables.get(i).sprite.setY(game_tables.get(i).map_y - cam_y);
+                }
 
                 // render the canvas based of the camera position
                 bg.renderCanvas((cam_y/ bg.tile_width), (cam_x/ bg.tile_width));
