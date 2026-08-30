@@ -33,7 +33,7 @@ public class StartMenu {
         // switch scene if button is clicked
         button.setOnAction(event -> {
             try {
-                main.switchScene(new Game(this.main).scene);
+                main.switchScene(new Casino(this.main).scene);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

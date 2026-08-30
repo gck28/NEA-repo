@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class GameSprites {
-    Game game;
+    Casino casino;
 
     ImageView sprite;
 
@@ -17,10 +17,10 @@ public class GameSprites {
     int map_y;
 
 
-    public  GameSprites (Game game, String sprite_path, Scene scene, int map_x, int map_y) throws FileNotFoundException {
-        this.game = game;
+    public  GameSprites (Casino casino, String sprite_path, Scene scene, int map_x, int map_y) throws FileNotFoundException {
+        this.casino = casino;
 
-        // the scene which is switched to when playing the game
+        // the scene which is switched to when playing the casino
         this.scene = scene;
 
         // create the sprite for the table

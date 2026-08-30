@@ -31,18 +31,18 @@ public class Player {
     boolean s_pressed = false;
     boolean d_pressed = false;
 
-    Game game;
+    Casino game;
 
-    public Player(Game game) throws FileNotFoundException {
-        this.game = game;
+    public Player(Casino casino) throws FileNotFoundException {
+        this.game = casino;
 
         // control sprite appearance and add key detection for the Game scene
         sprite = new ImageView(static_sprite);
         sprite.setPreserveRatio(true);
         sprite.setFitWidth(30);
         sprite.setFitHeight(64.3);
-        game.scene.setOnKeyPressed(this::keyPressed);
-        game.scene.setOnKeyReleased(this::keyReleased);
+        casino.scene.setOnKeyPressed(this::keyPressed);
+        casino.scene.setOnKeyReleased(this::keyReleased);
     }
 
     // functions which control key press and key release

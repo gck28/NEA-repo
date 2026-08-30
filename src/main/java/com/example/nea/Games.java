@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-class GameDefault {
+class Games {
     Main main;
 
     VBox root;
@@ -13,7 +13,7 @@ class GameDefault {
     Button startGame;
 
     // default game function which loads into the start screen for each minigame
-    public GameDefault(Main main){
+    public Games(Main main){
         this.main = main;
 
         root = new VBox();

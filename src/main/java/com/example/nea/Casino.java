@@ -1,25 +1,21 @@
 package com.example.nea;
 
 import javafx.animation.AnimationTimer;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-import javax.swing.text.html.ImageView;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 // main class which has the scene where the player can move around and choose which game they would like to play
 
-public class Game {
+public class Casino {
 
     Pane root;
     Scene scene;
 
-    GameDefault blackjack;
+    Games blackjack;
 
     Player player;
 
@@ -32,7 +28,7 @@ public class Game {
 
     ArrayList<GameSprites> game_tables;
 
-    public Game (Main main) throws IOException {
+    public Casino(Main main) throws IOException {
         this.main = main;
 
         // create root node and scene
