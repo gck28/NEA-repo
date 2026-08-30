@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 // class for the player and all their interactions and movements
@@ -31,10 +32,10 @@ public class Player {
     boolean s_pressed = false;
     boolean d_pressed = false;
 
-    Casino game;
+    Casino casino;
 
     public Player(Casino casino) throws FileNotFoundException {
-        this.game = casino;
+        this.casino = casino;
 
         // control sprite appearance and add key detection for the Game scene
         sprite = new ImageView(static_sprite);
@@ -121,15 +122,15 @@ public class Player {
     // collision detection with walls and sprites
     private void collisionDetection(int cam_x, int cam_y) {
         // the left and top values of the sprite in terms of the tiles
-        int left = (int) (map_x/game.bg.tile_width);
-        int top = (int) (map_y/game.bg.tile_width);
+        int left = (int) (map_x/ casino.bg.tile_width);
+        int top = (int) (map_y/ casino.bg.tile_width);
 
         // calculate the right and bottom values in terms of tiles
-        int right = (int) (sprite.getFitWidth() + map_x)/game.bg.tile_width;
-        int bottom = (int) (sprite.getFitHeight() + map_y)/game.bg.tile_width;
+        int right = (int) (sprite.getFitWidth() + map_x)/ casino.bg.tile_width;
+        int bottom = (int) (sprite.getFitHeight() + map_y)/ casino.bg.tile_width;
 
         // check to see if the borders of the sprite overlap with a tile of value 1
-        if ((game.bg.tilemap[top][left] == 1) || (game.bg.tilemap[top][right] == 1) || (game.bg.tilemap[bottom][left] == 1) || (game.bg.tilemap[bottom][right] == 1)){
+        if ((casino.bg.tilemap[top][left] == 1) || (casino.bg.tilemap[top][right] == 1) || (casino.bg.tilemap[bottom][left] == 1) || (casino.bg.tilemap[bottom][right] == 1)){
             // reset the values for map_x and map_y
             map_x = prev_map_x;
             map_y = prev_map_y;
@@ -137,6 +138,12 @@ public class Player {
             // reset the sprites position on the map
             sprite.setX(map_x-cam_x);
             sprite.setY(map_y-cam_y);
+        }
+
+        // check to see if it collides with any of the tables
+        ArrayList<GameSprites> tables = casino.game_tables;
+        for (int i = 0; i < tables.size(); i++) {
+
         }
     }
 }

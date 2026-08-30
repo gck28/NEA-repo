@@ -7,6 +7,7 @@ public class Blackjack extends Games {
 
     @Override
     void playGame(){
+        super.playGame();
         System.out.println("Playing Blackjack");
     }
 }
