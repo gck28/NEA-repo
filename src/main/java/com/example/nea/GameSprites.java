@@ -30,6 +30,7 @@ public class GameSprites {
         this.map_x = map_x;
         this.map_y = map_y;
 
+        // set the position on the map
         sprite.setX(map_x);
         sprite.setY(map_y);
     }

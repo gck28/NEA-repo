@@ -11,7 +11,7 @@ import java.util.ArrayList;
 // main class which has the scene where the player can move around and choose which game they would like to play
 
 public class Casino {
-
+    // global objects and variables
     Pane root;
     Scene scene;
 
@@ -25,6 +25,8 @@ public class Casino {
 
     int cam_x;
     int cam_y;
+
+    boolean is_interacting; // to check if the sprite is interacting with any tables
 
     ArrayList<GameSprites> game_tables;
 

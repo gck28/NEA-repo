@@ -1,5 +1,7 @@
 package com.example.nea;
 
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -142,8 +144,22 @@ public class Player {
 
         // check to see if it collides with any of the tables
         ArrayList<GameSprites> tables = casino.game_tables;
-        for (int i = 0; i < tables.size(); i++) {
+        for (GameSprites table : tables) {
+            // get bounds for table
+            Bounds table_bounds = table.sprite.getBoundsInParent();
 
+            // get bounds for sprite
+            Bounds player_bounds = sprite.getBoundsInParent();
+
+            if (player_bounds.intersects(table_bounds)){
+                // reset the values for map_x and map_y
+                map_x = prev_map_x;
+                map_y = prev_map_y;
+
+                // reset the sprites position on the map
+                sprite.setX(map_x-cam_x);
+                sprite.setY(map_y-cam_y);
+            }
         }
     }
 }
