@@ -142,21 +142,19 @@ public class Player {
             boolean sprite_right_of_table = player_bounds.getMinX() > collided_table_bounds.getMaxX();
 
             // calculate distance of player to table
-            double distance_to_table = 1000000000;
+            double distance_to_table = 0;
 
             if (sprite_above_table){
-                distance_to_table = Math.min(distance_to_table, collided_table_bounds.getMinY() - player_bounds.getMaxY());
+                distance_to_table = Math.max(distance_to_table, collided_table_bounds.getMinY() - player_bounds.getMaxY());
             } else if (sprite_below_table){
-                distance_to_table = Math.min(distance_to_table, player_bounds.getMinY() - collided_table_bounds.getMaxY());
+                distance_to_table = Math.max(distance_to_table, player_bounds.getMinY() - collided_table_bounds.getMaxY());
             }
 
             if (sprite_left_of_table){
-                distance_to_table = Math.min(distance_to_table, collided_table_bounds.getMinX() - player_bounds.getMaxX());
+                distance_to_table = Math.max(distance_to_table, collided_table_bounds.getMinX() - player_bounds.getMaxX());
             } else if (sprite_right_of_table){
-                distance_to_table = Math.min(distance_to_table, player_bounds.getMinX() - collided_table_bounds.getMaxX());
+                distance_to_table = Math.max(distance_to_table, player_bounds.getMinX() - collided_table_bounds.getMaxX());
             }
-
-            System.out.println(distance_to_table);
 
             // turn of interaction logo based on distance from table
             casino.is_interacting = distance_to_table <= 20;
