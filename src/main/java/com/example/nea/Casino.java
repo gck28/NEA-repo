@@ -2,8 +2,11 @@ package com.example.nea;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,6 +22,8 @@ public class Casino {
 
     Player player;
 
+    ImageView interact_button;
+
     Main main;
 
     Background bg;
@@ -28,7 +33,7 @@ public class Casino {
 
     boolean is_interacting; // to check if the sprite is interacting with any tables
 
-    ArrayList<GameSprites> game_tables;
+    ArrayList<Tables> game_tables;
 
     public Casino(Main main) throws IOException {
         this.main = main;
@@ -42,12 +47,16 @@ public class Casino {
 
         player = new Player(this); // create player
 
+        interact_button = new ImageView(new Image(new FileInputStream("Assets/press_e.png")));
+        interact_button.setPreserveRatio(true);
+        interact_button.setFitWidth(200);
+
         // create an arraylist for all the game tables
         game_tables = new ArrayList<>();
 
         // create two classes for the blackjack table on the main scene that is interacted with and the actual game that gets switched to
         blackjack = new Blackjack(main);
-        GameSprites blackjack_table = new GameSprites(this, "Assets/GameTableSprites/blackjack_table.png", blackjack.scene, 100, 100);
+        Tables blackjack_table = new Tables(this, "Assets/GameTableSprites/test_blackjack.png", blackjack.scene, 100, 100);
 
         game_tables.add(blackjack_table);
 
@@ -78,13 +87,23 @@ public class Casino {
                 player.updatePlayer(cam_x, cam_y); // handle player movement and collision
 
                 // reposition all the game tables with respect to the map
-                for (int i = 0; i < game_tables.size(); i++) {
-                    game_tables.get(i).sprite.setX(game_tables.get(i).map_x - cam_x);
-                    game_tables.get(i).sprite.setY(game_tables.get(i).map_y - cam_y);
+                for (Tables gameTable : game_tables) {
+                    gameTable.sprite.setX(gameTable.map_x - cam_x);
+                    gameTable.sprite.setY(gameTable.map_y - cam_y);
                 }
 
                 // render the canvas based of the camera position
                 bg.renderCanvas((cam_y/ bg.tile_width), (cam_x/ bg.tile_width));
+
+                // add interact button if a table is activated
+                if (is_interacting){
+                    interact_button.setX(main.width - interact_button.getFitWidth());
+                    interact_button.setY(0);
+                    root.getChildren().remove(interact_button);
+                    root.getChildren().add(interact_button);
+                } else {
+                    root.getChildren().remove(interact_button);
+                }
             }
 
             // function to check camera angles

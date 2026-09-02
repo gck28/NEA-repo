@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class GameSprites {
+public class Tables {
     Casino casino;
 
     ImageView sprite;
@@ -17,7 +17,7 @@ public class GameSprites {
     int map_y;
 
 
-    public  GameSprites (Casino casino, String sprite_path, Scene scene, int map_x, int map_y) throws FileNotFoundException {
+    public Tables(Casino casino, String sprite_path, Scene scene, int map_x, int map_y) throws FileNotFoundException {
         this.casino = casino;
 
         // the scene which is switched to when playing the casino
@@ -26,6 +26,7 @@ public class GameSprites {
         // create the sprite for the table
         this.sprite = new ImageView(new Image(new FileInputStream(sprite_path)));
         this.sprite.setPreserveRatio(true);
+        this.sprite.setFitWidth(225);
 
         this.map_x = map_x;
         this.map_y = map_y;
