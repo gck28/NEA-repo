@@ -1,5 +1,6 @@
 package com.example.nea;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -17,12 +18,13 @@ class Games {
         this.main = main;
 
         root = new VBox();
-        scene = new Scene(root);
+        root.setAlignment(Pos.CENTER);
+        scene = new Scene(root, main.width, main.height);
 
         startGame = new Button("Press to start game");
         startGame.setOnAction(event -> playGame());
 
-        root.getChildren().addAll();
+        root.getChildren().addAll(startGame);
 
         main.switchScene(scene);
     }

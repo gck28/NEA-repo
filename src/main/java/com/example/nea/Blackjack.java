@@ -22,11 +22,6 @@ public class Blackjack extends Games {
 
         CardDeck card_deck = new CardDeck();
 
-        for (int i = 0; i < 52; i++) {
-
-        }
-
-
         System.out.println("Playing Blackjack");
     }
 }
