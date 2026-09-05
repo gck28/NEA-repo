@@ -4,6 +4,8 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
@@ -32,6 +34,7 @@ public class Casino {
     int cam_y;
 
     boolean is_interacting; // to check if the sprite is interacting with any tables
+    boolean e_pressed; // create a boolean to check if a table has been clicked on
 
     ArrayList<Tables> game_tables;
 
@@ -70,7 +73,6 @@ public class Casino {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-
                 // calculate camera x and y coordinates relative to player
                 cam_x = (int) (player.map_x - ((double) main.width /2));
                 cam_y = (int) (player.map_y - ((double) main.height /2));
@@ -95,6 +97,8 @@ public class Casino {
                 // render the canvas based of the camera position
                 bg.renderCanvas((cam_y/ bg.tile_width), (cam_x/ bg.tile_width));
 
+                // change e_pressed value to false
+
                 // add interact button if a table is activated
                 if (is_interacting){
                     interact_button.setX(main.width - interact_button.getFitWidth());
@@ -104,7 +108,12 @@ public class Casino {
                 } else {
                     root.getChildren().remove(interact_button);
                 }
+
+                if (e_pressed && is_interacting){
+                    main.switchScene(player.activated_table.scene);
+                }
             }
+
 
             // function to check camera angles
             private int checkCam(int cam, int max) {

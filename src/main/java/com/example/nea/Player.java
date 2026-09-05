@@ -19,6 +19,8 @@ public class Player {
     final Image static_sprite = new Image(new FileInputStream("Assets/player_sprite.png"));
     final Image moving_sprite = new Image(new FileInputStream("Assets/player_moving_sprite.gif"));
 
+    // create variable for Table that is interacted with
+    Tables table;
     // sprite starting cords
     double map_x = 600;
     double map_y = 300;
@@ -26,9 +28,6 @@ public class Player {
     // sprite coordinates for correction in collision detection
     double prev_map_x= map_x;
     double prev_map_y = map_y;
-
-    double table_collide_coords_x;
-    double table_collide_coords_y;
 
 
     // booleans to for movement
@@ -53,7 +52,7 @@ public class Player {
     }
 
     // ------------------------- functions which control key press and key release -------------------------
-    private void keyReleased(KeyEvent event) {
+    public void keyReleased(KeyEvent event) {
         if (event.getCode() == KeyCode.W){
             w_pressed = false;
         }
@@ -66,9 +65,13 @@ public class Player {
         if (event.getCode() == KeyCode.D){
             d_pressed = false;
         }
+
+        if (event.getCode() == KeyCode.E){
+            casino.e_pressed = false;
+        }
     }
 
-    private void keyPressed(KeyEvent event) {
+    public void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.W){
             w_pressed = true;
         }
@@ -80,6 +83,9 @@ public class Player {
         }
         if (event.getCode() == KeyCode.D){
             d_pressed = true;
+        }
+        if (event.getCode() == KeyCode.E){
+            casino.e_pressed = true;
         }
     }
 
@@ -130,6 +136,7 @@ public class Player {
 
     // ------------------------- manage interaction and activation of tables if collided with -------------------------
     private void tableActivation(Tables table){
+        activated_table = table;
         if (table != null){
             // recalculate bounds for table and player
             Bounds collided_table_bounds = table.sprite.getBoundsInParent();
