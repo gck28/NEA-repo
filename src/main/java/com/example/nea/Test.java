@@ -27,20 +27,21 @@ import java.util.Set;
  * edges. Walls are solid (the player collides with them); doors are
  * gaps in the walls that let the player pass between rooms.
  */
-public class Test extends Application {
+public class Test extends Main{
+    Stage stage;
+    final int width = 1200;
+    final int height = 600;
 
-    public void start(Stage stage) throws FileNotFoundException {
-        stage = new Stage();
-        VBox root = new VBox();
-        Scene scene = new Scene(root);
+    @Override
+    public void start(Stage primary_stage) {
+        stage = primary_stage;
+        stage.setTitle("Casino game");
 
-        ImageView image = new ImageView(new Image(new FileInputStream("Assets/Cards/01_kerenel_Cards.png.gif")));
+        Blackjack blackjack = new Blackjack(this);
 
-        root.getChildren().addAll(image);
-        stage.setScene(scene);
+        stage.setScene(blackjack.scene);
         stage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

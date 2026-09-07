@@ -10,21 +10,20 @@ public class Blackjack extends Games {
         super(main);
     }
 
-    Scene scene;
-    VBox root;
-
     @Override
-    void playGame(){
+    public void playGame(){
         super.playGame();
-
-        root = new VBox();
-        scene = new Scene(root);
 
         CardDeck card_deck = new CardDeck();
 
-        for (int i = 0; i < 52; i++) {
+        ArrayList<Card> player_deck = new ArrayList<>();
+        ArrayList<Card> bot1_deck = new ArrayList<>();
+        ArrayList<Card> bot2_deck = new ArrayList<>();
 
-        }
+        boolean player_bust = false;
+        boolean bot1_bust = false;
+        boolean bot2_bust = false;
+
 
 
         System.out.println("Playing Blackjack");
