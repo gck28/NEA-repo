@@ -100,7 +100,7 @@ public class Player {
     // ------------------------- to move the player -------------------------
     private void movePlayer(int cam_x, int cam_y) {
         // create movement speed normally and movement speed for the tilemap (moves by a decimal amount)
-        double normal_speed = (double) 2;
+        double normal_speed = (double) 3;
 
         prev_map_x = map_x;
         prev_map_y = map_y;
