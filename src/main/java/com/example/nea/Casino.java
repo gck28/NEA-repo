@@ -106,14 +106,6 @@ public class Casino {
                     interact_button.setY(0);
                     root.getChildren().remove(interact_button);
                     root.getChildren().add(interact_button);
-
-                    // add key listener for E when interaction button is displayed
-
-                    scene.setOnKeyReleased(event -> {
-                        if (event.getCode() == KeyCode.E){
-                            main.switchScene(blackjack.scene);
-                        }
-                    });
                 } else {
                     root.getChildren().remove(interact_button);
                 }
