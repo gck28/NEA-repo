@@ -101,10 +101,19 @@ public class Casino {
 
                 // add interact button if a table is activated
                 if (is_interacting){
+                    // display interact button
                     interact_button.setX(main.width - interact_button.getFitWidth());
                     interact_button.setY(0);
                     root.getChildren().remove(interact_button);
                     root.getChildren().add(interact_button);
+
+                    // add key listener for E when interaction button is displayed
+
+                    scene.setOnKeyReleased(event -> {
+                        if (event.getCode() == KeyCode.E){
+                            main.switchScene(blackjack.scene);
+                        }
+                    });
                 } else {
                     root.getChildren().remove(interact_button);
                 }
