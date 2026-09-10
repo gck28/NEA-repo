@@ -97,8 +97,6 @@ public class Casino {
                 // render the canvas based of the camera position
                 bg.renderCanvas((cam_y/ bg.tile_width), (cam_x/ bg.tile_width));
 
-                // change e_pressed value to false
-
                 // add interact button if a table is activated
                 if (is_interacting){
                     // display interact button

@@ -209,7 +209,7 @@ public class Player {
             Bounds table_bounds = table.sprite.getBoundsInParent();
 
             if (player_bounds.intersects(table_bounds)){
-                //if true then change activ from null to the table
+                //if true then change active_table from null to the table
                 activated_table = table;
 
                 // reset the values for map _x and map_y
