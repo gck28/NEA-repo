@@ -7,6 +7,9 @@ import javafx.scene.paint.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Background {
@@ -17,17 +20,18 @@ public class Background {
     private static final String FLOOR_COLOR = "#90ee90";
     private static final String WALL_COLOR = "#800000";
     final int tile_width = 30;
+    String background_file;
 
-    int[][] tilemap;
+    ArrayList<ArrayList<Integer>> tilemap;
 
 
-    public Background(Main main) {
+    public Background(Main main, String background_file) {
         this.main = main;
 
         // create prerequisites for canvas, graphics context and tile map
         canvas = new Canvas(main.width, main.height);
         graphics_context = canvas.getGraphicsContext2D();
-
+        this.background_file = background_file;
 
         tilemap = readTileMap();
         renderCanvas(0, 0);
@@ -35,26 +39,27 @@ public class Background {
 
 
     // method to read tilemap from txt and convert to 2D array, where each element is an integer
-    private  int[][] readTileMap() {
-        int[][] return_array = new int[28][54];
+    private ArrayList<ArrayList<Integer>> readTileMap() {
+        ArrayList<ArrayList<Integer>> return_array = new ArrayList<>();
 
         int row = 0;
 
-        try (BufferedReader br = new BufferedReader(new FileReader("Assets/background.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(background_file))) {
             String line;
 
             while ((line = br.readLine()) != null) {
-                String[] line_array = line.split(",");  // separate into array based on commas
+                String[] row_array_strings = line.split(",");  // separate into array based on commas
 
-                // convert array of strings into array of integers
-                int[] int_row = new int[line_array.length];
+                // convert array of strings into array of integers and add to arrayList
+                int[] row_array_int = Arrays.stream(row_array_strings).mapToInt(Integer::parseInt).toArray();
+                ArrayList<Integer> row_arraylist = new ArrayList<>();
 
-                for (int col = 0; col < line_array.length; col++) {
-                    int_row[col] = Integer.parseInt(line_array[col]);
+                for (int i : row_array_int){
+                    row_arraylist.add(i);
                 }
 
                 // pass integer array into return_array and move onto next row;
-                return_array[row] = int_row;
+                return_array.add(row_arraylist);
                 row++;
             }
         } catch (IOException e) {
@@ -81,7 +86,7 @@ public class Background {
 
     // function to draw each tile on using switch cases for each number, which will determine colour and if it is a solid wall
     private void drawTile(int i, int j, int offset_x, int offset_y) {
-        switch(tilemap[i][j]){
+        switch(tilemap.get(i).get(j)){
             // case for a wall
             case 1:
                 graphics_context.setFill(Color.web(WALL_COLOR));

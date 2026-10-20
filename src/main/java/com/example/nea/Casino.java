@@ -46,7 +46,7 @@ public class Casino {
         root.setPrefSize(main.width, main.height);
         scene = new Scene(root, main.width, main.height);
 
-        bg = new Background(main); // create background
+        bg = new Background(main, "Assets/background.txt"); // create background
 
         player = new Player(this); // create player
 
@@ -78,8 +78,8 @@ public class Casino {
                 cam_y = (int) (player.map_y - ((double) main.height /2));
 
                 // calculate maximum camera positions for bound checking
-                int max_cam_x = (bg.tilemap[0].length*bg.tile_width) - main.width;
-                int max_cam_y = (bg.tilemap.length*bg.tile_width) - main.height;
+                int max_cam_x = (bg.tilemap.getFirst().size()*bg.tile_width) - main.width;
+                int max_cam_y = (bg.tilemap.size()*bg.tile_width) - main.height;
 
                 // adjust camera in case it forces the displayed background to go beyond the given walls.
                 cam_x = checkCam(cam_x, max_cam_x);

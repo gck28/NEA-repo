@@ -24,10 +24,6 @@ public class CardDeck {
 
             int value = Math.min(number, 10);
 
-            if (i >= 26) {
-                colour = "red";
-            }
-
             Card card = new Card(number, suits[suit_count], value, colour);
 
             deck.add(card);
@@ -36,7 +32,6 @@ public class CardDeck {
 
         // shuffle the deck
         Collections.shuffle(deck);
-
         return deck;
     }
 

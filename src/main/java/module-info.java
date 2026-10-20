@@ -4,6 +4,7 @@ module com.example.nea {
     requires javafx.graphics;
     requires java.xml;
     requires java.desktop;
+    requires java.sql;
 
 
     opens com.example.nea to javafx.fxml;

@@ -184,7 +184,7 @@ public class Player {
         int bottom = (int) (sprite.getFitHeight() + map_y)/ casino.bg.tile_width;
 
         // check to see if the borders of the sprite overlap with a tile of value 1
-        if ((casino.bg.tilemap[top][left] == 1) || (casino.bg.tilemap[top][right] == 1) || (casino.bg.tilemap[bottom][left] == 1) || (casino.bg.tilemap[bottom][right] == 1)){
+        if ((casino.bg.tilemap.get(top).get(left) == 1) || (casino.bg.tilemap.get(top).get(right) == 1) || (casino.bg.tilemap.get(bottom).get(left) == 1) || (casino.bg.tilemap.get(bottom).get(right) == 1)){
             // reset the values for map_x and map_y
             map_x = prev_map_x;
             map_y = prev_map_y;

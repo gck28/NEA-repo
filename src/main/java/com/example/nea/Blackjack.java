@@ -3,6 +3,7 @@ package com.example.nea;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 class Hand {
@@ -18,14 +19,15 @@ class Hand {
 
     // find total of the hand
     public int find_total(){
+        total = 0;
+
         for (Card card : hand) {
-            total = 0;
             total += card.value;
 
-            // if the value is 1, then an ace is in the deck, so increment ace_count and add 10 to total
+            // if the number is 1, then an ace is in the deck, so increment ace_count and add 10 to total
             if (card.number == 1){
                 ace_count += 1;
-                total += 10;
+                total += 10; // now value of ace is 11
             }
         }
         return total;
@@ -75,6 +77,8 @@ public class Blackjack extends Games {
         root = new VBox();
         scene = new Scene(root);
 
+        Background background = new Background(main, "Assets/background.txt");
+
         // shuffled deck
         CardDeck card_deck = new CardDeck();
 
@@ -93,9 +97,8 @@ public class Blackjack extends Games {
 
             if (player_hand.hand_in){
                 // give player the choice
-                System.out.println(player_hand.hand);
-                System.out.println("Hit or Stand:  ");
-                String move = scan.next();
+                System.out.print("Hit or Stand:  ");
+                String move = scan.nextLine();
 
                 // if they hit
                 if (move.equals("h")){
@@ -115,10 +118,6 @@ public class Blackjack extends Games {
             }
             // TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
 
-
         }
-
-
-        System.out.println("Playing Blackjack");
     }
 }
