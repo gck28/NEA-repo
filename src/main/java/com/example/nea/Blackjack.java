@@ -1,9 +1,7 @@
 package com.example.nea;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.animation.AnimationTimer;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 class Hand {
@@ -46,16 +44,17 @@ class Hand {
     }
 }
 
+
+
+
+
+
 public class Blackjack extends Games {
     Random random = new Random();
 
     public Blackjack(Main main) {
         super(main);
     }
-
-    Scene scene;
-    VBox root;
-
     Scanner scan;
 
     public void botMove(int total, boolean ace_present){
@@ -73,51 +72,50 @@ public class Blackjack extends Games {
     @Override
     public void playGame(){
         super.playGame();
-
-        root = new VBox();
-        scene = new Scene(root);
-
-        Background background = new Background(main, "Assets/background.txt");
+        Background bg = new Background(main, "Assets/blackjack_tilemap.txt");
+        System.out.println(bg.tilemap);
 
         // shuffled deck
         CardDeck card_deck = new CardDeck();
+        card_deck.deck = card_deck.generateDeck();
 
         // three players, player + 2 bots
         Hand player_hand = new Hand();
         Hand bot1_hand = new Hand();
         Hand bot2_hand = new Hand();
 
-        while (player_hand.hand_in || bot1_hand.hand_in || bot2_hand.hand_in){
-            // deal first 2 cards for each player
-            for (int i = 0; i < 3; i++) {
-                player_hand.hand.add(card_deck.dealCard());
-                bot1_hand.hand.add(card_deck.dealCard());
-                bot2_hand.hand.add(card_deck.dealCard());
-            }
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                if (player_hand.hand_in || bot1_hand.hand_in || bot2_hand.hand_in){
+                    if (player_hand.hand_in){
+                        // give player the choice
+                        System.out.print("Hit or Stand:  ");
+                        String move = scan.nextLine();
 
-            if (player_hand.hand_in){
-                // give player the choice
-                System.out.print("Hit or Stand:  ");
-                String move = scan.nextLine();
+                        // if they hit
+                        if (move.equals("h")){
+                            player_hand.hand.add(card_deck.dealCard());
+                        } else {
+                            player_hand.hand_in = false; // if they stand, remove it from the deck until dealer checks
+                        }
 
-                // if they hit
-                if (move.equals("h")){
-                    player_hand.hand.add(card_deck.dealCard());
-                } else {
-                    player_hand.hand_in = false; // if they stand, remove it from the deck until dealer checks
-                }
+                        player_hand.total = player_hand.find_total();
+                        player_hand.total = player_hand.ace_correction(player_hand);
+                    }
 
-                player_hand.total = player_hand.find_total();
-                player_hand.total = player_hand.ace_correction(player_hand);
-            }
-
-            if (bot1_hand.hand_in){
-                if (bot1_hand.total < 14){
-                    bot1_hand.hand.add(card_deck.dealCard());
+                    if (bot1_hand.hand_in){
+                        if (bot1_hand.total < 14){
+                            bot1_hand.hand.add(card_deck.dealCard());
+                        }
+                    }
                 }
             }
-            // TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
+        };
+        timer.start();
 
-        }
+             //TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
+        root.getChildren().addAll(bg.canvas);
+        System.out.println("added");
     }
 }

@@ -19,6 +19,7 @@ public class Background {
     GraphicsContext graphics_context;
     private static final String FLOOR_COLOR = "#90ee90";
     private static final String WALL_COLOR = "#800000";
+    private static final String WHITE = "#FFFFFF";
     final int tile_width = 30;
     String background_file;
 
@@ -98,6 +99,10 @@ public class Background {
                 graphics_context.setFill(Color.web(FLOOR_COLOR));
                 graphics_context.fillRect(offset_x*tile_width, offset_y*tile_width, tile_width, tile_width);
                 break;
+            case 2:
+                graphics_context.setFill(Color.web(WHITE));
+                graphics_context.fillRect(offset_x*tile_width, offset_y*tile_width, tile_width, tile_width);
+
         }
     }
 }

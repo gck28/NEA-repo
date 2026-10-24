@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class CardDeck {
     int jokers = 2;
-    ArrayList<Card> deck = generateDeck();
+    ArrayList<Card> deck;
 
     // function to generate a standard deck using the Card class
     public ArrayList<Card> generateDeck() {
@@ -32,13 +32,15 @@ public class CardDeck {
 
         // shuffle the deck
         Collections.shuffle(deck);
+        System.out.println(deck.size());
+
         return deck;
     }
 
     // function to deal cards
     public Card dealCard() {
 
-        Card to_return =  deck.getFirst();
+        Card to_return = deck.getFirst();
         deck.removeFirst();
 
         return to_return;
