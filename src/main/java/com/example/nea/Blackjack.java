@@ -7,7 +7,7 @@ import java.util.*;
 class Hand {
     ArrayList<Card> hand;
     boolean hand_in;
-    int total = 0;
+    int total = find_total();
     int ace_count = 0;
 
     public Hand(){
@@ -17,15 +17,14 @@ class Hand {
 
     // find total of the hand
     public int find_total(){
-        total = 0;
-
+        assert hand != null;
         for (Card card : hand) {
             total += card.value;
 
             // if the number is 1, then an ace is in the deck, so increment ace_count and add 10 to total
             if (card.number == 1){
                 ace_count += 1;
-                total += 10; // now value of ace is 11
+                total += 1; // now value of ace is 11
             }
         }
         return total;
@@ -84,35 +83,21 @@ public class Blackjack extends Games {
         Hand bot1_hand = new Hand();
         Hand bot2_hand = new Hand();
 
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                if (player_hand.hand_in || bot1_hand.hand_in || bot2_hand.hand_in){
-                    if (player_hand.hand_in){
-                        // give player the choice
-                        System.out.print("Hit or Stand:  ");
-                        String move = scan.nextLine();
+        for (int i = 0; i < 2; i++) {
+            player_hand.hand.add(card_deck.dealCard());
+            bot1_hand.hand.add(card_deck.dealCard());
+            bot2_hand.hand.add(card_deck.dealCard());
+        }
 
-                        // if they hit
-                        if (move.equals("h")){
-                            player_hand.hand.add(card_deck.dealCard());
-                        } else {
-                            player_hand.hand_in = false; // if they stand, remove it from the deck until dealer checks
-                        }
-
-                        player_hand.total = player_hand.find_total();
-                        player_hand.total = player_hand.ace_correction(player_hand);
-                    }
-
-                    if (bot1_hand.hand_in){
-                        if (bot1_hand.total < 14){
-                            bot1_hand.hand.add(card_deck.dealCard());
-                        }
-                    }
-                }
-            }
-        };
-        timer.start();
+//        AnimationTimer timer = new AnimationTimer() {
+//            @Override
+//            public void handle(long l) {
+//                if (player_hand.hand_in || bot1_hand.hand_in || bot2_hand.hand_in){
+//
+//                }
+//            }
+//        };
+//        timer.start();
 
              //TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
         root.getChildren().addAll(bg.canvas);

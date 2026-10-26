@@ -17,6 +17,10 @@ public class CardDeck {
         int suit_count = 0;
 
         for (int i = 0; i < 52; i++) {
+            if (i > 25){
+                colour = "red";
+            }
+
             if (number > 13) {
                 number = 1;
                 suit_count++;
