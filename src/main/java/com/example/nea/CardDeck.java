@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class CardDeck {
     int jokers = 2;
-    ArrayList<Card> deck;
+    ArrayList<Card> deck = generateDeck();
 
     // function to generate a standard deck using the Card class
     public ArrayList<Card> generateDeck() {
