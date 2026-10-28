@@ -1,10 +1,8 @@
 package com.example.nea;
 
 import javafx.animation.AnimationTimer;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -50,7 +48,7 @@ class Hand {
 }
 
 
-public class Blackjack extends Games {
+public class Blackjack extends CardGames {
     ImageView card_back;
     boolean first_deals = true;
 
@@ -61,22 +59,12 @@ public class Blackjack extends Games {
     @Override
     public void playGame() throws IOException {
         super.playGame();
-        Background bg = new Background(main, "Assets/card_game_tilemap.txt");
-        System.out.println(bg.tilemap);
-
-        // display cards at the top where they are dealt from
-        card_back = new ImageView(new Image(new FileInputStream("Assets/Cards/back_of_card.png")));
-        card_back.setPreserveRatio(true);
-        card_back.setFitWidth(75);
-        card_back.setX(card_deck.deck.getFirst().x_coordinate);
-        card_back.setY(card_deck.deck.getFirst().y_coordinate);
 
         // three players, player + 2 bots
         Hand player_hand = new Hand(0);
         Hand bot1_hand = new Hand(0);
         Hand bot2_hand = new Hand(0);
 
-        root.getChildren().addAll(bg.canvas, card_back);        // add background and card back to the root
 
         // timer to execute the game
         AnimationTimer main_timer = new AnimationTimer() {

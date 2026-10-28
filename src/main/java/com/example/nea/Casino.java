@@ -18,7 +18,7 @@ public class Casino {
     Pane root;
     Scene scene;
 
-    Games blackjack;
+    CardGames blackjack;
 
     Player player;
 

@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-class Games {
+class CardGames {
     Main main;
 
     Pane root;
@@ -19,10 +19,11 @@ class Games {
 
     Button startGame;
 
+    ImageView card_back;
     CardDeck card_deck;
 
     // default game function which loads into the start screen for each minigame
-    public Games(Main main){
+    public CardGames(Main main){
         this.main = main;
 
         root = new Pane();
@@ -49,6 +50,20 @@ class Games {
         // create a card deck for the games which have cards
         card_deck = new CardDeck();
         card_deck.deck = card_deck.generateDeck();
+
+        // create the background
+        Background bg = new Background(main, "Assets/card_game_tilemap.txt");
+
+        // create the card back that is shown at the top right where cards are dealt from
+        card_back = new ImageView(new Image(new FileInputStream("Assets/Cards/back_of_card.png")));
+        card_back.setPreserveRatio(true);
+        card_back.setFitWidth(75);
+        card_back.setX(card_deck.deck.getFirst().x_coordinate);
+        card_back.setY(card_deck.deck.getFirst().y_coordinate);
+
+        root.getChildren().addAll(bg.canvas, card_back);        // add background and card back to the root
+
+
     }
 
     public Card move_deal_card(int x, int y){
