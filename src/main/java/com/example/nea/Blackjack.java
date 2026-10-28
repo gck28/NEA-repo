@@ -53,7 +53,6 @@ class Hand {
 public class Blackjack extends Games {
     ImageView card_back;
     boolean first_deals = true;
-    CardDeck card_deck;
 
     public Blackjack(Main main){
         super(main);
@@ -77,14 +76,7 @@ public class Blackjack extends Games {
         Hand bot1_hand = new Hand(0);
         Hand bot2_hand = new Hand(0);
 
-        // add base nodes to the root
-        root.getChildren().addAll(bg.canvas);
-
-        // add the back of the card 3 times in the position of the deck
-        for (int i = 0; i < 3; i++) {
-            root.getChildren().addAll(card_back);
-        }
-
+        root.getChildren().addAll(bg.canvas, card_back);        // add background and card back to the root
 
         // timer to execute the game
         AnimationTimer main_timer = new AnimationTimer() {
