@@ -1,16 +1,22 @@
 package com.example.nea;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
 
 class Hand {
     ArrayList<Card> hand;
     boolean hand_in;
-    int total = find_total();
+    int total = 0;
     int ace_count = 0;
+    int hand_x_pos;
 
-    public Hand(){
+    public Hand(int hand_x_pos){
+        this.hand_x_pos = hand_x_pos;
         hand = new ArrayList<>();
         hand_in = true;
     }
@@ -44,63 +50,65 @@ class Hand {
 }
 
 
-
-
-
-
 public class Blackjack extends Games {
-    Random random = new Random();
+    ImageView card_back;
+    boolean first_deals = true;
+    CardDeck card_deck;
 
-    public Blackjack(Main main) {
+    public Blackjack(Main main){
         super(main);
-    }
-    Scanner scan;
-
-    public void botMove(int total, boolean ace_present){
-        // create hashmap which changes probability of a bot hit
-        Dictionary<Integer, Integer> probabilities =  new Hashtable<>();
-        probabilities.put(14, 100);
-        probabilities.put(15, 70);
-        probabilities.put(16, 55);
-        probabilities.put(17, 30);
-        probabilities.put(18, 15);
-        probabilities.put(19, 7);
-        probabilities.put(20, 2);
     }
 
     @Override
-    public void playGame(){
+    public void playGame() throws IOException {
         super.playGame();
-        Background bg = new Background(main, "Assets/blackjack_tilemap.txt");
+        Background bg = new Background(main, "Assets/card_game_tilemap.txt");
         System.out.println(bg.tilemap);
 
-        // shuffled deck
-        CardDeck card_deck = new CardDeck();
-        card_deck.deck = card_deck.generateDeck();
+        // display cards at the top where they are dealt from
+        card_back = new ImageView(new Image(new FileInputStream("Assets/Cards/back_of_card.png")));
+        card_back.setPreserveRatio(true);
+        card_back.setFitWidth(75);
+        card_back.setX(card_deck.deck.getFirst().x_coordinate);
+        card_back.setY(card_deck.deck.getFirst().y_coordinate);
 
         // three players, player + 2 bots
-        Hand player_hand = new Hand();
-        Hand bot1_hand = new Hand();
-        Hand bot2_hand = new Hand();
+        Hand player_hand = new Hand(0);
+        Hand bot1_hand = new Hand(0);
+        Hand bot2_hand = new Hand(0);
 
-        for (int i = 0; i < 2; i++) {
-            player_hand.hand.add(card_deck.dealCard());
-            bot1_hand.hand.add(card_deck.dealCard());
-            bot2_hand.hand.add(card_deck.dealCard());
+        // add base nodes to the root
+        root.getChildren().addAll(bg.canvas);
+
+        // add the back of the card 3 times in the position of the deck
+        for (int i = 0; i < 3; i++) {
+            root.getChildren().addAll(card_back);
         }
 
-//        AnimationTimer timer = new AnimationTimer() {
-//            @Override
-//            public void handle(long l) {
-//                if (player_hand.hand_in || bot1_hand.hand_in || bot2_hand.hand_in){
-//
-//                }
-//            }
-//        };
-//        timer.start();
 
-             //TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
-        root.getChildren().addAll(bg.canvas);
-        System.out.println("added");
+        // timer to execute the game
+        AnimationTimer main_timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                // deal two cards to each player to start
+                if (first_deals){
+                    for (int i = 0; i < 2; i++) {
+                        player_hand.hand.add(move_deal_card(0, 0));
+                        bot1_hand.hand.add(card_deck.dealCard());
+                        bot2_hand.hand.add(card_deck.dealCard());
+                    }
+                    first_deals = false;
+                }
+                else{
+                    // normally play game
+                }
+            }
+        };
+        main_timer.start();
+
+        //TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
+
     }
+
+
 }
