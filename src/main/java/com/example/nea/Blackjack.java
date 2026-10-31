@@ -1,7 +1,8 @@
 package com.example.nea;
 
 import javafx.animation.AnimationTimer;
-import javafx.scene.image.ImageView;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.*;
@@ -49,7 +50,6 @@ class Hand {
 
 
 public class Blackjack extends CardGames {
-    ImageView card_back;
     boolean first_deals = true;
 
     public Blackjack(Main main){
@@ -57,7 +57,7 @@ public class Blackjack extends CardGames {
     }
 
     @Override
-    public void playGame() throws IOException {
+    public void playGame() throws IOException, InterruptedException {
         super.playGame();
 
         // three players, player + 2 bots
@@ -66,25 +66,24 @@ public class Blackjack extends CardGames {
         Hand bot2_hand = new Hand(0);
 
 
+
+        for (int i = 0; i < 2; i++) {
+            player_hand.hand.add(move_deal_card(0, 0));
+            System.out.println("Dealt to player");
+            bot1_hand.hand.add(move_deal_card(0, 0));
+            System.out.println("Dealt to bot1");
+            bot2_hand.hand.add(move_deal_card(0, 0));
+            System.out.println("Dealt to bot2");
+        }
+
         // timer to execute the game
-        AnimationTimer main_timer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                // deal two cards to each player to start
-                if (first_deals){
-                    for (int i = 0; i < 2; i++) {
-                        player_hand.hand.add(move_deal_card(0, 0));
-                        bot1_hand.hand.add(card_deck.dealCard());
-                        bot2_hand.hand.add(card_deck.dealCard());
-                    }
-                    first_deals = false;
-                }
-                else{
-                    // normally play game
-                }
-            }
-        };
-        main_timer.start();
+//        AnimationTimer main_timer = new AnimationTimer() {
+//            @Override
+//            public void handle(long l) {
+//
+//            }
+//        };
+//        main_timer.start();
 
         //TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
 
