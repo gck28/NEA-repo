@@ -112,7 +112,7 @@ public class Casino {
             }
 
 
-            // function to check camera angles
+            // function to check camera is within the bounds of tilemap, and moves it back if not
             private int checkCam(int cam, int max) {
                 if (cam < 0){
                     return 0;

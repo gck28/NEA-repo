@@ -1,9 +1,5 @@
 package com.example.nea;
 
-import javafx.animation.AnimationTimer;
-import javafx.animation.PauseTransition;
-import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.*;
 

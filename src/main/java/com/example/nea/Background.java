@@ -80,14 +80,14 @@ public class Background {
 
         for (int i = start_y; i < start_y+num_tiles_down; i++) { // i represents tiles going down
             for (int j = start_x; j < start_x+num_tiles_across; j++) { // j represents tiles going across
-                drawTile(i, j, j-start_x, i-start_y);  // calculate the offset for positions of each tile on the scene
+                drawTile(tilemap.get(i).get(j), j-start_x, i-start_y);  // calculate the offset for positions of each tile on the scene
             }
         }
     }
 
     // function to draw each tile on using switch cases for each number, which will determine colour and if it is a solid wall
-    private void drawTile(int i, int j, int offset_x, int offset_y) {
-        switch(tilemap.get(i).get(j)){
+    private void drawTile(int tile_num, int offset_x, int offset_y) {
+        switch(tile_num){
             // case for a wall
             case 1:
                 graphics_context.setFill(Color.web(WALL_COLOR));
