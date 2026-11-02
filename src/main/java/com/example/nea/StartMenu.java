@@ -31,7 +31,7 @@ public class StartMenu {
         Button button = new Button("Start");
 
         // switch scene if button is clicked
-        button.setOnAction(event -> {
+        button.setOnAction(_ -> {
             try {
                 main.switchScene(new Casino(this.main).scene);
             } catch (IOException e) {

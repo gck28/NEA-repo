@@ -85,7 +85,7 @@ class CardGames {
 
 
     // flip the card
-    public SequentialTransition flip_card(ImageView card_image, ImageView card_front) throws FileNotFoundException {
+    public SequentialTransition flip_card(ImageView card_image, ImageView card_front) {
         ScaleTransition squash = new ScaleTransition(Duration.millis(150), card_image);
         squash.setToX(0);
         squash.play();

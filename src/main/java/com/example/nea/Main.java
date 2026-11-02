@@ -23,10 +23,6 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args){
-        launch();
-    }
-
     public void switchScene(Scene scene) {
         stage.setScene(scene);
     }
