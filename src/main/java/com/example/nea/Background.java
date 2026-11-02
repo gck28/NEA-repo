@@ -7,8 +7,6 @@ import javafx.scene.paint.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,8 +41,6 @@ public class Background {
     private ArrayList<ArrayList<Integer>> readTileMap() {
         ArrayList<ArrayList<Integer>> return_array = new ArrayList<>();
 
-        int row = 0;
-
         try (BufferedReader br = new BufferedReader(new FileReader(background_file))) {
             String line;
 
@@ -61,7 +57,6 @@ public class Background {
 
                 // pass integer array into return_array and move onto next row;
                 return_array.add(row_arraylist);
-                row++;
             }
         } catch (IOException e) {
             System.out.println("Error reading file.");
