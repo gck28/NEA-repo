@@ -62,7 +62,6 @@ public class Blackjack extends CardGames {
         Hand bot2_hand = new Hand(0);
 
 
-
         for (int i = 0; i < 2; i++) {
             player_hand.hand.add(move_deal_card(0, 0));
             System.out.println("Dealt to player");
