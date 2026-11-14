@@ -1,5 +1,7 @@
 package com.example.nea;
 
+import javafx.animation.AnimationTimer;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -63,22 +65,22 @@ public class Blackjack extends CardGames {
 
 
         for (int i = 0; i < 2; i++) {
-            player_hand.hand.add(move_deal_card(0, 0));
+            player_hand.hand.add(move_deal_card(337+player_hand.hand.size()*15, 400));
             System.out.println("Dealt to player");
-            bot1_hand.hand.add(move_deal_card(0, 0));
+            bot1_hand.hand.add(move_deal_card(577+bot1_hand.hand.size()*15, 400));
             System.out.println("Dealt to bot1");
-            bot2_hand.hand.add(move_deal_card(0, 0));
+            bot2_hand.hand.add(move_deal_card(817+bot2_hand.hand.size()*15, 400));
             System.out.println("Dealt to bot2");
         }
 
         // timer to execute the game
-//        AnimationTimer main_timer = new AnimationTimer() {
-//            @Override
-//            public void handle(long l) {
-//
-//            }
-//        };
-//        main_timer.start();
+        AnimationTimer main_timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+
+            }
+        };
+        main_timer.start();
 
         //TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
 
