@@ -86,7 +86,7 @@ class CardGames {
         root.getChildren().add(card_image);
         card_image.toFront();
 
-        SequentialTransition move_deal = new SequentialTransition(flip_card(card_image, card.card_image), move_card(card_image, x, y));
+        SequentialTransition move_deal = new SequentialTransition(move_card(card_image, x, y), flip_card(card_image, card.card_image));
         transitions_queue.add(move_deal);
 
         if (!is_transitioning){
@@ -117,12 +117,12 @@ class CardGames {
 
     // flip the card
     public SequentialTransition flip_card(ImageView card_image, ImageView card_front) {
-        ScaleTransition squash = new ScaleTransition(Duration.seconds(0.5), card_image);
+        ScaleTransition squash = new ScaleTransition(Duration.seconds(0.25), card_image);
         squash.setToX(0);
         squash.setOnFinished(event -> {
             card_image.setImage(card_front.getImage());
         });
-        ScaleTransition stretch = new ScaleTransition(Duration.millis(0.5), card_image);
+        ScaleTransition stretch = new ScaleTransition(Duration.millis(0.25), card_image);
         stretch.setToX(1);
         SequentialTransition squash_stretch = new SequentialTransition(squash, stretch);
 
@@ -134,7 +134,7 @@ class CardGames {
 
     // move card
     public SequentialTransition move_card(ImageView card_image, int x, int y){
-        TranslateTransition move = new TranslateTransition(Duration.seconds(1.5), card_image);
+        TranslateTransition move = new TranslateTransition(Duration.seconds(1), card_image);
         move.setToX(x - card_deck.deck.getFirst().x_coordinate);
         move.setToY(y - card_deck.deck.getFirst().y_coordinate);
 

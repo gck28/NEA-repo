@@ -32,8 +32,7 @@ public class Casino {
     int cam_y;
 
     boolean is_interacting; // to check if the sprite is interacting with any tables
-    boolean e_pressed; // create a boolean to check if a table has been clicked on
-
+    boolean e_pressed; // create a boolean to check if a table has been clicked
     ArrayList<Tables> game_tables;
 
     public Casino(Main main) throws IOException {

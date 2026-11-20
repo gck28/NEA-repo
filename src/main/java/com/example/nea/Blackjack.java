@@ -1,6 +1,8 @@
 package com.example.nea;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.util.*;
@@ -48,8 +50,6 @@ class Hand {
 
 
 public class Blackjack extends CardGames {
-    boolean first_deals = true;
-
     public Blackjack(Main main){
         super(main);
     }
@@ -63,7 +63,6 @@ public class Blackjack extends CardGames {
         Hand bot1_hand = new Hand(0);
         Hand bot2_hand = new Hand(0);
 
-
         for (int i = 0; i < 2; i++) {
             player_hand.hand.add(move_deal_card(337+player_hand.hand.size()*15, 400));
             System.out.println("Dealt to player");
@@ -72,18 +71,26 @@ public class Blackjack extends CardGames {
             bot2_hand.hand.add(move_deal_card(817+bot2_hand.hand.size()*15, 400));
             System.out.println("Dealt to bot2");
         }
+        scene.setOnKeyPressed(this::move_made);
 
         // timer to execute the game
         AnimationTimer main_timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-
             }
         };
         main_timer.start();
 
         //TODO bot move, create a dictionary with totals and probability of a hit, which decides what the bot will do, then deal the card.
 
+    }
+
+    private void move_made(KeyEvent event){
+        if (event.getCode() == KeyCode.H){
+            System.out.println("hit");
+        } else if (event.getCode() == KeyCode.S){
+            System.out.println("stand");
+        }
     }
 
 
