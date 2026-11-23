@@ -73,7 +73,7 @@ class CardGames {
         root.getChildren().addAll(bg.canvas, card_back);        // add background and card back to the root
     }
 
-    public Card move_deal_card(int x, int y) {
+    public Card move_deal_card(Hand hand) {
 
         Card card = card_deck.dealCard();
 
@@ -86,7 +86,7 @@ class CardGames {
         root.getChildren().add(card_image);
         card_image.toFront();
 
-        SequentialTransition move_deal = new SequentialTransition(move_card(card_image, x, y), flip_card(card_image, card.card_image));
+        SequentialTransition move_deal = new SequentialTransition(move_card(card_image, hand.hand_x_pos+hand.hand.size()*15, 400), flip_card(card_image, card.card_image));
         transitions_queue.add(move_deal);
 
         if (!is_transitioning){
