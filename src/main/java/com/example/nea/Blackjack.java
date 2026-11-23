@@ -48,6 +48,7 @@ public class Blackjack extends CardGames {
 
     }
 
+
     private void move_made(KeyEvent event){
         if (event.getCode() == KeyCode.H){
             player_hand.hand.add(move_deal_card(player_hand));
@@ -57,7 +58,14 @@ public class Blackjack extends CardGames {
         }
     }
 
+    @Override
+    public Card move_deal_card(Hand hand) {
+        Card card = super.move_deal_card(hand);
+        
+        return card;
+    }
 
 
 
-}
+
+    }
