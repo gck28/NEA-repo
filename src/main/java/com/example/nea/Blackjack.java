@@ -12,10 +12,11 @@ public class Blackjack extends CardGames {
         super(main);
     }
 
-
     Hand player_hand;
     Hand bot1_hand;
     Hand bot2_hand;
+
+    Boolean player_moved = false;
 
     @Override
     public void playGame() throws IOException, InterruptedException {
@@ -40,6 +41,14 @@ public class Blackjack extends CardGames {
         AnimationTimer main_timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
+                if (player_hand.hand_in){
+                    if (player_moved){
+                        bot_moves();
+                        player_moved = false;
+                    }
+                } else{
+                    bot_moves();
+                }
             }
         };
         main_timer.start();
@@ -48,7 +57,6 @@ public class Blackjack extends CardGames {
 
     }
 
-
     private void move_made(KeyEvent event){
         if (event.getCode() == KeyCode.H){
             player_hand.hand.add(move_deal_card(player_hand));
@@ -56,16 +64,21 @@ public class Blackjack extends CardGames {
         } else if (event.getCode() == KeyCode.S){
             player_hand.hand_in = false;
         }
+
+        player_moved = true;
+    }
+
+    private void bot_moves() {
+            if (bot1_hand.hand_in){
+                bot1_hand.hand.add(move_deal_card(bot1_hand));
+                System.out.println("Dealt to bot1");
+            }
+            if (bot2_hand.hand_in){
+                bot2_hand.hand.add(move_deal_card(bot2_hand));
+                System.out.println("Dealt to bot2");
+            }
     }
 
     @Override
-    public Card move_deal_card(Hand hand) {
-        Card card = super.move_deal_card(hand);
-        
-        return card;
-    }
 
-
-
-
-    }
+}

@@ -108,11 +108,8 @@ class CardGames {
             transition.setOnFinished(event -> {
                 playTransition();
             });
-
             transition.play();
-
         }
-
     }
 
     // flip the card
